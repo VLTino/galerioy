@@ -3,6 +3,11 @@
 
 
 @section('content')
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="container mt-5">
         <form action="/login" method="post">
             @csrf

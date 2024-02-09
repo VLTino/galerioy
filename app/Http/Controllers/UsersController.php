@@ -34,7 +34,8 @@ class UsersController extends Controller
         $user->password = bcrypt($request->input('password'));  
         $user->level = $request->input('level');  
         $user->save();
-        return back();
+        return redirect()->route('login')->with('success', 'User successfully registered. Please login.');
+
     }
 
     /**
