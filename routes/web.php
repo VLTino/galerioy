@@ -21,14 +21,16 @@ Route::get('/login',[LoginController::class,'index'])->middleware('guest')->name
 
 Route::post('/login', [LoginController::class,'authenticate']);
 
-Route::get('/reg', function () {
-    return view('hal.reg666');
-});
+Route::get('/reg',[UsersController::class,'index']);
 
 Route::post('/reg',[UsersController::class,'store']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/galeriku',[GalleryController::class,'index']);
+    Route::get('/detail',[GalleryController::class,'detail']);
+    Route::get('/galeriku/detail',[GalleryController::class,'galeridetail']);
+    Route::get('/upload',[GalleryController::class,'upload']);
+    Route::post('/upload',[GalleryController::class,'store']);
 });
 Route::get('/', [DashboardController::class, 'index']);
 

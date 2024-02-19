@@ -53,7 +53,7 @@
                                           
                                         </div>
                                         
-                                        <input type="hidden" name="level" id="" value="0">
+                                        <input type="hidden" name="level" id="" value="user">
 
 
                                         <button class="btn btn-outline-light btn-lg px-5" type="submit">Register</button>

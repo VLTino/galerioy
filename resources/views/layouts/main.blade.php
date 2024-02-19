@@ -7,17 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <title>{{ $title }}</title>
 </head>
 
 <body>
-    @unless(Request::is('login') || Request::is('reg') || Request::is('galeriku'))
+    @unless(Request::is('login') || Request::is('reg') || Request::is('galeriku') | Request::is('upload'))
         @include('components.navbar')
     @endunless
     @yield('content')
 
- 
+    <footer>
+        &copy; 2024 VLTino77. All Rights Reserved.
+    </footer>
 
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>

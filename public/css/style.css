@@ -1,15 +1,21 @@
 body {
     background-color: white;
+    overflow: hidden;
+}
+
+/* Default styles for gallery items */
+.gallery-item,
+.gallery-item2 {
+    width: 100%;
+    margin-bottom: 20px; /* Increased margin for better spacing */
 }
 
 .gallery-item {
-    width: 100%;
     columns: 4;
     column-gap: 20px;
 }
 
 .gallery-item2 {
-    width: 100%;
     columns: 6;
     column-gap: 15px;
 }
@@ -20,10 +26,34 @@ body {
     break-inside: avoid;
 }
 
-.gambar img{
+.gambar img {
     max-width: 100%;
     border-radius: 15px;
 }
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 1200px) {
+    .gallery-item,
+    .gallery-item2 {
+        columns: 3;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .gallery-item,
+    .gallery-item2 {
+        columns: 2;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .gallery-item,
+    .gallery-item2 {
+        columns: 1;
+        column-gap: 0; /* No gap for single column */
+    }
+}
+
 
 /* sidebar galeriku */
 
@@ -41,7 +71,7 @@ body {
     padding: 15px;
     text-decoration: none;
     font-size: 20px;
-    color: black;
+    
     display: block;
     transition: 0.3s;
 }
@@ -50,11 +80,36 @@ body {
     background-color: #e8e8e8;
 }
 
+.sideactive {
+    background-color: #ff0000;
+    color: white;
+}
+
+.side {
+  color: black;
+}
+
 .content {
     margin-left: 250px;
     padding: 16px;
 }
 
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
 /* navbar */
 
 .nav-link {
@@ -88,3 +143,56 @@ body {
   .nav-link:hover {
     background-color: whitesmoke
   }
+
+  .img-detail {
+    width: 500px;
+  }
+
+  /* img {
+    filter: drop-shadow(15px 5px 5px gray);
+  } */
+  
+  .btnheart:hover {
+    color: red; 
+  }
+
+  .btnheartactive {
+    background-color: red;
+    color: white;
+  }
+
+  .btnfav:hover {
+    color: yellow; 
+  }
+
+  .btnfavactive {
+    background-color: yellow;
+    color: white;
+  }
+
+  .btnshare:hover {
+    color: cyan; 
+  }
+
+  .btnshareactive {
+    background-color: cyan;
+    color: white;
+  }
+
+  .comment-profil img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  footer {
+    margin-top: 20px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    position: static;
+    bottom: 0;
+    width: 100%;
+}
