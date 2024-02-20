@@ -11,7 +11,7 @@
 <div class="content container mt-5">
     <div class="header col-12"><h1>Upload</h1></div>
     
-    <form action="/upload" method="post" class="mt-5">
+    <form action="/upload" method="post" class="mt-5" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
         <input type="hidden" name="userid" value="{{ Auth::user()->userid }}">

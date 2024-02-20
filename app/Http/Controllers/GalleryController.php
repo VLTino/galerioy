@@ -47,18 +47,26 @@ class GalleryController extends Controller
 
     public function store(StoregalleryRequest $request)
     {
-        // Menyimpan gambar
-        $gambarPath = $request->file('gambar')->store('img', 'public');
-
-        // Membuat objek Gallery
-        $gallery = new gallery();
+        $gallery = new Gallery();
         $gallery->describe_photo = $request->input('describe_photo');
-        $gallery->gambar = $gambarPath;
         $gallery->userid = $request->input('userid');
         $gallery->like_post = $request->input('like_post');
+
+        // Handling file upload
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Save image to storage
+            Storage::putFileAs('public/img', $image, $imageName);
+
+            // Save image name to database
+            $gallery->gambar = $imageName;
+        }
+
         $gallery->save();
 
-        return redirect()->route('/galeriku')->with('success', 'User successfully registered. Please login.');
+        return redirect()->route('galeriku');
     }
 
 

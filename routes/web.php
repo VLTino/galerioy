@@ -26,7 +26,7 @@ Route::get('/reg',[UsersController::class,'index']);
 Route::post('/reg',[UsersController::class,'store']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/galeriku',[GalleryController::class,'index']);
+    Route::get('/galeriku',[GalleryController::class,'index'])->name('galeriku');
     Route::get('/detail',[GalleryController::class,'detail']);
     Route::get('/galeriku/detail',[GalleryController::class,'galeridetail']);
     Route::get('/upload',[GalleryController::class,'upload']);
