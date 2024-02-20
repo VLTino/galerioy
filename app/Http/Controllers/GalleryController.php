@@ -6,6 +6,7 @@ use App\Models\gallery;
 use App\Http\Requests\StoregalleryRequest;
 use App\Http\Requests\UpdategalleryRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class GalleryController extends Controller
 {
@@ -22,8 +23,15 @@ class GalleryController extends Controller
 
     public function index()
     {
+         // Get the authenticated user's email
+    $userEmail = Auth::user()->userid;
+
+    // Retrieve gallery data where the email matches the authenticated user's email
+    $posts = gallery::where('userid', $userEmail)->get();
+
         return view('hal.galeriku', [
             "title" => "Galeriku",
+            "posts" => $posts,
         ]);
     }
 
