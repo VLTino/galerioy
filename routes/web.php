@@ -25,14 +25,14 @@ Route::get('/reg',[UsersController::class,'index']);
 
 Route::post('/reg',[UsersController::class,'store']);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','UserAccess:user,admin'])->group(function () {
     Route::get('/galeriku',[GalleryController::class,'index'])->name('galeriku');
-    Route::get('/detail',[GalleryController::class,'detail']);
+    Route::get('/detail/{post:id_photo}',[GalleryController::class,'detail']);
     Route::get('/galeriku/detail',[GalleryController::class,'galeridetail']);
     Route::get('/upload',[GalleryController::class,'upload']);
     Route::post('/upload',[GalleryController::class,'store']);
 });
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [GalleryController::class, 'home']);
 
 Route::get('/logout',[LoginController::class,'logout']);
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container d-flex justify-content-center align-items-center detail">
-        <img src="/img/tokyo3.jpg" alt="" class="img-detail img-fluid">
+        <img src="\storage\img\{{ $post->gambar }}" alt="" class="img-detail img-fluid">
     </div>
 
     <div class="container mt-4">
@@ -39,14 +39,14 @@
                     </div>
                 
                     <div class="col-lg-3 d-flex justify-content-center">
-                        <h5>User Name</h5>
+                        <h5>{{ $post->user->name }}</h5>
                     </div>
                 </div>
 
                 <div class="describe mb-5 mt-3 d-flex justify-content-center align-items-center">
                     
                         <div class="">
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore corporis iure non iusto pariatur quas eos, quos illo tempora quod minima, nesciunt vitae inventore corrupti voluptas facere suscipit ut! Blanditiis expedita iusto dolores nesciunt minima consequuntur facilis ipsa, debitis sunt non ratione, odio officia dolore sed inventore consequatur aut! Corrupti?</p>
+                            <p>{{ $post->describe_photo }}</p>
                         </div>
                     
                 </div>

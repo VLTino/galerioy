@@ -23,7 +23,7 @@ class StoregalleryRequest extends FormRequest
     {
         return [
             'describe_photo' => 'required|string|max:50',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg',
             'userid' => 'required',
             'like_post' => 'required'
         ];

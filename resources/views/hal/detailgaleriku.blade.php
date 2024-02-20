@@ -70,7 +70,7 @@
             </div>
         
             <div class="col-lg-10">
-                <h5>User Name</h5>
+                <h5>{{ $post->users->name }}</h5>
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore corporis iure non iusto pariatur quas eos, quos illo tempora quod minima, nesciunt vitae inventore corrupti voluptas facere suscipit ut! Blanditiis expedita iusto dolores nesciunt minima consequuntur facilis ipsa, debitis sunt non ratione, odio officia dolore sed inventore consequatur aut! Corrupti?</p>
             </div>
         </div>

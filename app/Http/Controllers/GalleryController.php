@@ -12,17 +12,26 @@ class GalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function home()
     {
-        return view('hal.galeriku', [
-            "title" => "Galeriku"
+        return view('hal.home',[
+            "title" => "Dashboard",
+            "posts" => gallery::all(),
         ]);
     }
 
-    public function detail()
+    public function index()
+    {
+        return view('hal.galeriku', [
+            "title" => "Galeriku",
+        ]);
+    }
+
+    public function detail(gallery $post)
     {
         return view('hal.detail', [
-            "title" => "Detail"
+            "title" => "Detail",
+            "post" => $post,
         ]);
     }
 

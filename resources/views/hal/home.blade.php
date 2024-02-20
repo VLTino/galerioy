@@ -5,30 +5,11 @@
 
         <!-- Gambar 1 -->
         <div class="gallery-item">
+            @foreach ($posts as $post)
 
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo3.jpg"></a></div>
-            
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo1.png"></a></div>
-
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo2.png"></a></div>
-
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo4.jpg"></a></div>
-
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo1.png"></a></div>
-
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo3.jpg"></a></div>
-
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo2.png"></a></div>
-
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo4.jpg"></a></div>
-
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo1.png"></a></div>
-
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo3.jpg"></a></div>
-
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo2.png"></a></div>
-
-            <div class="gambar"> <a href="/detail"><img src="img/tokyo4.jpg"></a></div>
+            <div class="gambar"> <a href="/detail/{{ $post->id_photo }}"><img src="\storage\img\{{ $post->gambar }}"></a></div>
+                
+            @endforeach
 
 
         </div>

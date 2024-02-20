@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\gallery;
 
 class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return view('hal.home',[
-            "title" => "Dashboard"
-        ]);
-    }
+    // public function index()
+    // {
+    //     return view('hal.home',[
+    //         "title" => "Dashboard",
+    //         "posts" => gallery::all(),
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.
