@@ -7,7 +7,7 @@
         <div class="gallery-item">
             @foreach ($posts as $post)
 
-            <div class="gambar"> <a href="/detail/{{ $post->id_photo }}"><img src="\storage\img\{{ $post->gambar }}"></a></div>
+            <div class="gambar"> <a href="/detail/{{ $post->gambar }}"><img src="\storage\img\{{ $post->gambar }}"></a></div>
                 
             @endforeach
 

@@ -15,7 +15,7 @@ class GalleryController extends Controller
      */
     public function home()
     {
-        return view('hal.home',[
+        return view('hal.home', [
             "title" => "Dashboard",
             "posts" => gallery::all(),
         ]);
@@ -23,11 +23,11 @@ class GalleryController extends Controller
 
     public function index()
     {
-         // Get the authenticated user's email
-    $userEmail = Auth::user()->userid;
 
-    // Retrieve gallery data where the email matches the authenticated user's email
-    $posts = gallery::where('userid', $userEmail)->get();
+        $userID = Auth::user()->userid;
+
+
+        $posts = gallery::where('userid', $userID)->get();
 
         return view('hal.galeriku', [
             "title" => "Galeriku",
@@ -83,7 +83,7 @@ class GalleryController extends Controller
 
         $gallery->save();
 
-        return redirect()->route('galeriku');
+        return redirect()->route('galeriku')->with('success', 'Gambar berhasil ditambahkan');
     }
 
 
@@ -98,9 +98,12 @@ class GalleryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(gallery $gallery)
+    public function edit(gallery $post)
     {
-        //
+        return view('hal.editgambar', [
+            "title" => "Edit",
+            "post" => $post,
+        ]);
     }
 
     /**
@@ -114,8 +117,24 @@ class GalleryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(gallery $gallery)
+    public function destroy($id)
     {
-        //
+        // Find the gallery entry by ID
+        $gallery = Gallery::find($id);
+
+        if (!$gallery) {
+            return redirect()->route('galeriku')->with('error', 'Gambar tidak ditemukan');
+        }
+
+        // Delete the associated image file from storage
+        $imagePath = 'public/img/' . $gallery->gambar;
+        if (Storage::exists($imagePath)) {
+            Storage::delete($imagePath);
+        }
+
+        // Delete the gallery entry from the database
+        $gallery->delete();
+
+        return redirect()->route('galeriku')->with('success', 'Gambar berhasil dihapus');
     }
 }

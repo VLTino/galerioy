@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    @unless(Request::is('login') || Request::is('reg') || Request::is('galeriku') | Request::is('upload'))
+    @unless(Request::is('login') || Request::is('reg') || Request::is('galeriku') || Request::is('upload') || Request::is('edit/*'))
         @include('components.navbar')
     @endunless
     @yield('content')

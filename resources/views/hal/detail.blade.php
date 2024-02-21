@@ -25,20 +25,36 @@
                         </button>
                     </form>
 
-                    <form action="" method="post" class="d-inline">
+                    
                         @csrf
-                        <button type="submit" class="btn btnshare btn-lg mr-2">
+                        <button id="shareButton" class="btn btnshare btn-lg mr-2">
                             <i class="fa-regular fa-share-from-square"></i>
                         </button>
+                    
+                    @if (Auth::user()->userid == $post->userid)
+                    <form action="/edit/{{ $post->gambar }}" method="post" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btnfav btn-lg mr-2">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
                     </form>
+
+                    <form action="/delete/{{ $post->id_photo }}" method="post" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btnheart btn-lg mr-2">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </form>
+                        
+                    @endif
                 </div>
 
                 <div class="row d-flex justify-content-center align-items-center mt-3">
-                    <div class="col-lg-2 d-flex justify-content-center">
+                    <div class="col-lg-12 d-flex justify-content-center">
                         <img src="/img/tokyo3.jpg" alt="" srcset="" style="border-radius: 50%;width:50px;height:50px;" class="img-fluid">
                     </div>
                 
-                    <div class="col-lg-3 d-flex justify-content-center">
+                    <div class="col-lg-12 d-flex justify-content-center">
                         <h5>{{ $post->user->name }}</h5>
                     </div>
                 </div>
@@ -90,4 +106,33 @@
         </div>
         
     </div>
+
+    <script>
+        // Fungsi untuk menyalin link ke clipboard
+        function copyToClipboard() {
+          // Mengambil elemen input atau textarea dengan value berisi link yang ingin disalin
+          const linkInput = document.createElement('input');
+          const linkText = window.location.href;
+    
+          // Menambahkan link ke elemen input
+          linkInput.value = linkText;
+    
+          // Menambahkan elemen input ke body
+          document.body.appendChild(linkInput);
+    
+          // Memilih dan menyalin teks di dalam elemen input
+          linkInput.select();
+          document.execCommand('copy');
+    
+          // Menghapus elemen input setelah disalin
+          document.body.removeChild(linkInput);
+    
+          // Pemberitahuan bahwa link berhasil disalin (opsional)
+          alert('Link has been copied to clipboard: ' + linkText);
+        }
+    
+        // Menambahkan event listener pada tombol
+        const shareButton = document.getElementById('shareButton');
+        shareButton.addEventListener('click', copyToClipboard);
+      </script>
 @endsection
