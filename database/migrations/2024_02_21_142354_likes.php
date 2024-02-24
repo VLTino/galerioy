@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comment_logs', function (Blueprint $table) {
-            $table->increments('id_comment');
-            $table->string('comment', 50);
-            $table->unsignedInteger('id_photo');
+        Schema::create('likes', function (Blueprint $table) {
+            $table->increments('idlike');
             $table->unsignedInteger('userid');
+            $table->unsignedInteger('id_photo');
+            $table->timestamps();
             $table->foreign('userid')->references('userid')->on('users')->onDelete('cascade');
             $table->foreign('id_photo')->references('id_photo')->on('galleries')->onDelete('cascade');
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comment_log');
+        Schema::dropIfExists('likes');
     }
 };

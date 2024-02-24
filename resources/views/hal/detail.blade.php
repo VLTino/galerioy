@@ -18,12 +18,12 @@
                     </form>
 
                     <!-- Favorite Button Form -->
-                    <form action="" method="post" class="d-inline">
+                    {{-- <form action="" method="post" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btnfav btn-lg mr-2">
                             <i class="fa-regular fa-bookmark"></i>
                         </button>
-                    </form>
+                    </form> --}}
 
                     
                         @csrf
@@ -46,6 +46,21 @@
                         </button>
                     </form>
                         
+                    @elseif (Auth::user()->level == "admin")
+                    <form action="/edit/{{ $post->gambar }}" method="post" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btnfav btn-lg mr-2">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </form>
+
+                    <form action="/delete/{{ $post->id_photo }}" method="post" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btnheart btn-lg mr-2">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </form>
+
                     @endif
                 </div>
 

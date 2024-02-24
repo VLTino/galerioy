@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,6 +19,15 @@ return new class extends Migration
             $table->timestamps();
             $table->string('level');
         });
+
+        DB::unprepared('
+        CREATE TRIGGER after_insert_users
+        AFTER INSERT
+        ON users FOR EACH ROW
+        INSERT INTO profiles (userid, describe_profile, link_acc, photo_profile)
+        VALUES (NEW.userid, NULL, NULL, NULL);
+        ');
+
     }
 
     /**
@@ -28,5 +36,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+
+        DB::unprepared('DROP TRIGGER IF EXISTS after_insert_users');
     }
 };

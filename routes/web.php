@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,14 @@ Route::middleware(['auth','UserAccess:user,admin'])->group(function () {
     Route::get('/upload',[GalleryController::class,'upload']);
     Route::post('/upload',[GalleryController::class,'store']);
     Route::post('/delete/{id:id_photo}',[GalleryController::class, 'destroy']);
+});
+
+
+Route::middleware(['auth','UserAccess:admin'])->group(function () {
+    Route::get('/admin',[AdminController::class,'index']);
+    Route::get('/userdata',[AdminController::class,'user']);
+    Route::get('/registeradmin',[AdminController::class,'regadmin']);
+    Route::post('/regadmin',[UsersController::class,'store']);
 });
 Route::get('/', [GalleryController::class, 'home']);
 

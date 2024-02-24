@@ -9,10 +9,11 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css?v=2">
     <title>{{ $title }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-    @unless(Request::is('login') || Request::is('reg') || Request::is('galeriku') || Request::is('upload') || Request::is('edit/*'))
+    @unless(Request::is('login') || Request::is('reg') || Request::is('galeriku') || Request::is('upload') || Request::is('edit/*') || Request::is('admin') || Request::is('userdata') || Request::is('registeradmin'))
         @include('components.navbar')
     @endunless
     @yield('content')

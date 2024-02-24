@@ -11,7 +11,7 @@
                     <a class="nav-link" aria-current="page" style="" href="/galeriku">Galeriku</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" style="" href="/favorit">Favorit</a>
+                    <a class="nav-link" aria-current="page" style="" href="/upload">Upload</a>
                 </li>
             </ul>
             <form class="d-flex container-fluid" role="search">
@@ -29,7 +29,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 @auth
               <li class="nav-item">
-                <a href="" style="" class="nav-link">Profile</a>
+                <a href="" style="" class="nav-link">{{ Auth::user()->name }}</a>
               </li>
               <li class="nav-item">
                 <a href="/logout" style="" class="nav-link"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
