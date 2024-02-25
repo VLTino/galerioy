@@ -11,7 +11,7 @@ class UpdategalleryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdategalleryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'describe_photo' => 'required|string|max:50',
+            'gambar' => 'image|mimes:jpeg,png,jpg',
+            'userid' => 'required',
+            'like_post' => 'required'
         ];
     }
 }

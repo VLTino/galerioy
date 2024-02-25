@@ -29,11 +29,12 @@ Route::post('/reg',[UsersController::class,'store']);
 Route::middleware(['auth','UserAccess:user,admin'])->group(function () {
     Route::get('/galeriku',[GalleryController::class,'index'])->name('galeriku');
     Route::get('/detail/{post:gambar}',[GalleryController::class,'detail'])->name('detail');
-    Route::post('/edit/{post:gambar}',[GalleryController::class,'edit'])->name('edit');
+    Route::get('/edit/{post:gambar}',[GalleryController::class,'edit'])->name('edit');
     Route::get('/galeriku/detail',[GalleryController::class,'galeridetail']);
     Route::get('/upload',[GalleryController::class,'upload']);
     Route::post('/upload',[GalleryController::class,'store']);
     Route::post('/delete/{id:id_photo}',[GalleryController::class, 'destroy']);
+    Route::post('/edit/{id:id_photo}',[GalleryController::class,'update']);
 });
 
 

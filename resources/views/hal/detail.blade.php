@@ -32,7 +32,7 @@
                         </button>
                     
                     @if (Auth::user()->userid == $post->userid)
-                    <form action="/edit/{{ $post->gambar }}" method="post" class="d-inline">
+                    <form action="/edit/{{ $post->gambar }}" method="get" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btnfav btn-lg mr-2">
                             <i class="fa-regular fa-pen-to-square"></i>
@@ -47,7 +47,7 @@
                     </form>
                         
                     @elseif (Auth::user()->level == "admin")
-                    <form action="/edit/{{ $post->gambar }}" method="post" class="d-inline">
+                    <form action="/edit/{{ $post->gambar }}" method="get" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btnfav btn-lg mr-2">
                             <i class="fa-regular fa-pen-to-square"></i>
