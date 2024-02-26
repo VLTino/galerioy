@@ -26,7 +26,7 @@
 @section('content')
     <div class="content container mt-5">
         <div class="header col-12">
-            <h1>Edit</h1>
+            <h1>Profile</h1>
         </div>
 
         <div class="container d-flex justify-content-center align-items-center detail">
