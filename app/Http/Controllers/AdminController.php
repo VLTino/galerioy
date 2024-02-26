@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\gallery;
 
 class AdminController extends Controller
 {
@@ -10,11 +11,28 @@ class AdminController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view ('hal.admin',[
-            "title" => "Dashboard Admin",
-        ]);
-    }
+{
+    return view('hal.admin',[
+        "title" => "Dashboard Admin"
+    ]);
+}
+
+public function getGalleryChartData(Request $request)
+{
+    $startDate = $request->input('start_date');
+    $endDate = $request->input('end_date');
+dd($startDate);
+    $imageData = Gallery::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
+        ->whereBetween('created_at', [$startDate, $endDate])
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+
+    $labels = $imageData->pluck('month');
+    $imageCount = $imageData->pluck('count');
+
+    return response()->json(['labels' => $labels, 'imageCount' => $imageCount]);
+}
     public function user()
     {
         return view ('hal.userdata',[

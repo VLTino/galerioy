@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Models\gallery;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,16 @@ Route::middleware(['auth','UserAccess:user,admin'])->group(function () {
 
 
 Route::middleware(['auth','UserAccess:admin'])->group(function () {
-    Route::get('/admin',[AdminController::class,'index']);
+    // Route::get('/admin',[AdminController::class,'index']);
+    Route::get('/admin', function () {
+        return view('hal.admin', [
+            'title' => 'Admin',
+            'gambarcount' => gallery::select(DB::raw('DATE_FORMAT(created_at, "%M") AS date'), DB::raw('COUNT(*) AS count'))
+            ->groupBy(DB::raw('DATE_FORMAT(created_at, "%M")'))
+            ->orderBy(DB::raw('DATE_FORMAT(created_at, "%M")'))
+            ->get()
+        ]);
+    })->name('dashboard');
     Route::get('/userdata',[AdminController::class,'user']);
     Route::get('/registeradmin',[AdminController::class,'regadmin']);
     Route::post('/regadmin',[UsersController::class,'store']);
