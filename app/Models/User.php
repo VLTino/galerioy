@@ -51,4 +51,8 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(gallery::class);
     }
+
+    public function profile(){
+        return $this->belongsTo(profile::class);
+    }
 }

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    @unless(Request::is('login') || Request::is('reg') || Request::is('galeriku') || Request::is('upload') || Request::is('edit/*') || Request::is('admin') || Request::is('userdata') || Request::is('registeradmin'))
+    @unless(Request::is('login') || Request::is('reg') || Request::is('galeriku') || Request::is('upload') || Request::is('edit/*') || Request::is('admin') || Request::is('userdata') || Request::is('registeradmin') || Request::is('profile/*'))
         @include('components.navbar')
     @endunless
     @yield('content')

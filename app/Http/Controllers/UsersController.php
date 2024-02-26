@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\profile;
 use App\Http\Requests\StoreUsersRequest;
+use Illuminate\Support\Facades\Auth;
 class UsersController extends Controller
 {
     /**
@@ -45,7 +47,15 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $userID = Auth::user()->userid;
+        
+
+        $user = profile::where('userid', $userID)->first();
+
+        return view('hal.profile', [
+            "title" => "Profile",
+            "user" => $user,
+        ]);
     }
 
     /**

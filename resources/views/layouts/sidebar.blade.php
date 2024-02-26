@@ -6,6 +6,7 @@
     <a href="/registeradmin" class="side{{ request()->is('registeradmin') ? 'active' : '' }}">Register Admin</a>
         
     @endif
+    <a href="/profile/{{ Auth::user()->userid }}" class="side{{ request()->is('profile') ? 'active' : '' }}">Profile</a>
     <a href="/galeriku" class="side{{ request()->is('galeriku') ? 'active' : '' }}">Galeriku</a>
     <a href="/upload" class="side{{ request()->is('upload') ? 'active' : '' }}">Upload Gambar</a>
 </div>
