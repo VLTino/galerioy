@@ -23,4 +23,9 @@ class gallery extends Model
     public function user(){
         return $this->belongsTo(User::class, 'userid');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,'id_photo');
+    }
 }

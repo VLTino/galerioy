@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCommentRequest;
 use App\Models\gallery;
 use App\Http\Requests\StoregalleryRequest;
 use App\Http\Requests\UpdategalleryRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Models\comment;
 
 class GalleryController extends Controller
 {
@@ -42,6 +44,18 @@ class GalleryController extends Controller
             "post" => $post,
         ]);
     }
+
+    public function storeComment(StoreCommentRequest $request, Gallery $post)
+{
+
+    Comment::create([
+        'id_photo' => $post->id_photo,
+        'comment' => $request->input('comment'),
+        'userid' => Auth::user()->userid
+    ]);
+
+    return redirect()->back()->with('success', 'Comment added successfully!');
+}
 
     public function upload()
     {

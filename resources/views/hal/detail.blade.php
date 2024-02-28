@@ -1,6 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="container d-flex justify-content-center align-items-center detail">
         <img src="\storage\img\{{ $post->gambar }}" alt="" class="img-detail img-fluid">
     </div>
@@ -17,13 +22,7 @@
                         </button>
                     </form>
 
-                    <!-- Favorite Button Form -->
-                    {{-- <form action="" method="post" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btnfav btn-lg mr-2">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </button>
-                    </form> --}}
+                    
 
                     
                         @csrf
@@ -66,7 +65,12 @@
 
                 <div class="row d-flex justify-content-center align-items-center mt-3">
                     <div class="col-lg-12 d-flex justify-content-center">
-                        <img src="/img/tokyo3.jpg" alt="" srcset="" style="border-radius: 50%;width:50px;height:50px;" class="img-fluid">
+                        @if($post && $post->user && $post->user->profile && $post->user->profile->photo_profile  )
+                        <img src="\storage\img\{{ $post->user->profile->photo_profile }}" alt="" class="img-fluid" style="border-radius: 50%;width:50px;height:50px;">
+                    @else
+                        <!-- Display a default image or message if $user is null -->
+                        <img src="/default/pp.jpg" alt="Default Image" class="img-fluid" style="border-radius: 50%;width:50px;height:50px;">
+                    @endif
                     </div>
                 
                     <div class="col-lg-12 d-flex justify-content-center">
@@ -86,7 +90,7 @@
                 <div class="mb-3">
                     <h5>Comments</h5>
                     <!-- Add your comment input field and submit button here -->
-                    <form action="" method="post">
+                    <form action="/comments/{{ $post->id_photo }}" method="post">
                         @csrf
                         <div class="form-group">
                             <textarea name="comment" class="form-control" placeholder="Add a comment"></textarea>
@@ -97,28 +101,26 @@
 
                 
 
-                <!-- Display Comments -->
-                <div>
-                    <!-- Loop through and display comments -->
-                    {{-- @foreach ($comments as $comment)
-                    <div class="mb-2">
-                        <strong>{{ $comment->user->name }}</strong>: {{ $comment->comment }}
-                    </div>
-                @endforeach --}}
-
-                </div>
+               
             </div>
         </div>
+        @foreach ($post->comments as $comment)
         <div class="row d-flex align-items-center mt-3">
             <div class="col-lg-1 comment-profil">
-                <img src="/img/tokyo3.jpg" alt="" srcset="" class="img-fluid">
+                @if($comment && $comment->user && $comment->user->profile && $comment->user->profile->photo_profile)
+                <img src="\storage\img\{{ $comment->user->profile->photo_profile }}" alt="" class="img-detail img-fluid">
+            @else
+                <!-- Display a default image or message if $user is null -->
+                <img src="/default/pp.jpg" alt="Default Image" class="img-detail img-fluid">
+            @endif
             </div>
-        
+    
             <div class="col-lg-10">
-                <h5>User Name</h5>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore corporis iure non iusto pariatur quas eos, quos illo tempora quod minima, nesciunt vitae inventore corrupti voluptas facere suscipit ut! Blanditiis expedita iusto dolores nesciunt minima consequuntur facilis ipsa, debitis sunt non ratione, odio officia dolore sed inventore consequatur aut! Corrupti?</p>
+                <h5>{{ $comment->user->name }}</h5>
+                <p>{{ $comment->comment }}</p>
             </div>
         </div>
+    @endforeach
         
     </div>
 
