@@ -53,15 +53,34 @@
                         </button>
                     </form>
 
-                    <form action="/delete/{{ $post->id_photo }}" method="post" class="d-inline">
+                    <form id="deleteForm" action="/delete/{{ $post->id_photo }}" method="post" class="d-inline">
                         @csrf
-                        <button type="submit" class="btn btnheart btn-lg mr-2">
+                        <button type="button" class="btn btnheart btn-lg mr-2" onclick="konfirmasiHapus()">
                             <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </form>
 
                     @endif
                 </div>
+
+                <script>
+                    function konfirmasiHapus() {
+                        // Menggunakan SweetAlert untuk menampilkan dialog konfirmasi
+                        Swal.fire({
+                            title: 'Apakah Anda yakin?',
+                            text: 'Anda tidak dapat mengembalikan data yang dihapus!',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Ya, hapus!',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => {
+                            // Jika pengguna menekan OK, kirim formulir untuk menghapus data
+                            if (result.isConfirmed) {
+                                document.getElementById("deleteForm").submit();
+                            }
+                        });
+                    }
+                </script>
 
                 <div class="row d-flex justify-content-center align-items-center mt-3">
                     <div class="col-lg-12 d-flex justify-content-center">

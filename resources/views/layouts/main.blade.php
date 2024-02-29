@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/style.css?v=2">
     <title>{{ $title }}</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
