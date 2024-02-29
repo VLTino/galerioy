@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\gallery;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -37,6 +38,7 @@ dd($startDate);
     {
         return view ('hal.userdata',[
             "title" => "Userdata",
+            "users" => User::all()
         ]);
     }
     public function regadmin()

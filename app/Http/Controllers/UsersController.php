@@ -58,6 +58,28 @@ class UsersController extends Controller
         ]);
     }
 
+    public function editLevel(Request $request, $userId)
+    {
+        // Validate the request
+        $request->validate([
+            'level' => 'required|in:admin,user,banned',
+        ]);
+
+        // Update the user's level
+        $user = User::find($userId);
+
+        // Check if the user exists
+        if (!$user) {
+            abort(404, 'User not found');
+        }
+
+        $user->level = $request->input('level');
+        $user->save();
+
+        // Redirect back or to a specific route
+        return redirect()->back()->with('success', 'User level updated successfully');
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

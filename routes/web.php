@@ -56,6 +56,7 @@ Route::middleware(['auth','UserAccess:admin'])->group(function () {
     Route::get('/userdata',[AdminController::class,'user']);
     Route::get('/registeradmin',[AdminController::class,'regadmin']);
     Route::post('/regadmin',[UsersController::class,'store']);
+    Route::post('/editlevel/{userid}',[UsersController::class,'editLevel']);
 });
 Route::get('/', [GalleryController::class, 'home']);
 

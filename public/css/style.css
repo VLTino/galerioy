@@ -196,3 +196,50 @@ body {
     bottom: 0;
     width: 100%;
 }
+
+ /* Style for modal container */
+ .modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background overlay */
+}
+.modal-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  /* Style for modal content */
+  .modal-content {
+      background-color: #fefefe;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 500px; /* Adjust the width as needed */
+  }
+
+  /* Style for close button */
+  .close {
+    color: #aaa;
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
