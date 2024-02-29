@@ -101,6 +101,13 @@ class UsersController extends Controller
      */
     public function destroy($userid)
     {
-        dd($userid);
+        $user = User::find($userid);
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User tidak ditemukan');
+        }
+
+        $user -> delete();
+        return redirect()->back()->with('success', 'User has been deleted');
     }
 }
