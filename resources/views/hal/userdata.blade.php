@@ -37,9 +37,9 @@
                             <a href="#" onclick="openEditModal({{ $user->userid }})">
                                 <i class="fa-regular fa-pen-to-square btn btnfav btn-lg"></i>
                             </a>
-                            <form id="deleteuser" action="/deleteuser/{{ $user->userid }}" method="post" class="d-inline">
+                            <form id="deleteuser{{ $user->userid }}" action="/deleteuser/{{ $user->userid }}" method="post" class="d-inline">
                               @csrf
-                              <button type="button" class="btn btnheart btn-lg mr-2" onclick="deleteusers()">
+                              <button type="button" class="btn btnheart btn-lg mr-2" onclick="deleteusers({{ $user->userid }})">
                                   <i class="fa-regular fa-trash-can"></i>
                               </button>
                           </form>
@@ -81,7 +81,7 @@
             }
         </script>
         <script>
-            function deleteusers() {
+            function deleteusers(userId) {
                 Swal.fire({
                     title: "Yakin untuk menghapus user?",
                     text: "Pastikan gambar yang di upload user sudah terhapus",
@@ -93,7 +93,7 @@
                 }).then((result) => {
                     // Jika pengguna menekan OK, kirim formulir untuk menghapus data
                     if (result.isConfirmed) {
-                        document.getElementById("deleteuser").submit();
+                        document.getElementById("deleteuser" + userId).submit();
                     }
                 });
             }
