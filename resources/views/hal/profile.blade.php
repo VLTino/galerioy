@@ -25,6 +25,11 @@
 
 @section('content')
     <div class="content container mt-5">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
         <div class="header col-12">
             <h1>Profile</h1>
         </div>
