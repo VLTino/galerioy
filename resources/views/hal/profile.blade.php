@@ -31,7 +31,7 @@
 
         <div class="container d-flex justify-content-center align-items-center detail">
             @if($user && $user->photo_profile)
-                <img src="\storage\img\{{ $user->photo_profile }}" alt="" class="img-detail img-fluid">
+                <img src="\storage\profile_photos\{{ $user->photo_profile }}" alt="" class="img-detail img-fluid">
             @else
                 <!-- Display a default image or message if $user is null -->
                 <img src="/default/pp.jpg" alt="Default Image" class="img-detail img-fluid">
@@ -45,7 +45,7 @@
                 @error('photo_profile')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <input type="file" name="photo_profile" class="custom-file-input" id="fileInput" onchange="displayFileName()">
+                <input type="file" name="photo_profile" class="custom-file-input" id="fileInput" value="{{ $user->link_acc }}" onchange="displayFileName()">
                 <label for="fileInput" class="custom-file-label" id="fileLabel">Change</label>
 
                 <script>
@@ -56,10 +56,14 @@
                         label.innerHTML = fileName;
                     }
                 </script>
+                 @error('link_acc')
+                 <div class="alert alert-danger">{{ $message }}</div>
+             @enderror
+                <input type="text" name="link_acc" id="" value="{{ $user->link_acc }}" class="form-control" placeholder="web link">
                 @error('describe_photo')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <textarea name="describe_photo" id="" cols="30" rows="10" class="form-control">{{ $user ? $user->describe_profile : 'Data not filled yet' }}</textarea>
+                <textarea name="describe_profile" id="" cols="30" rows="10" class="form-control" placeholder="Deskripsi Profile">{{ $user->describe_profile }}</textarea>
                 <button type="submit" class="btn btn-success form-control">Upload</button>
             </div>
         </form>

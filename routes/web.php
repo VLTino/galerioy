@@ -37,7 +37,8 @@ Route::middleware(['auth','UserAccess:user,admin'])->group(function () {
     Route::post('/delete/{id:id_photo}',[GalleryController::class, 'destroy']);
     Route::post('/edit/{id:id_photo}',[GalleryController::class,'update']);
     Route::get('/profile/{id:userid}',[UsersController::class,'show']);
-    Route::post('/comments/{post}', [GalleryController::class, 'storeComment'])->name('comments.store');    
+    Route::post('/comments/{post}', [GalleryController::class, 'storeComment'])->name('comments.store');   
+    Route::post('/editprofile/{profileid}', [UsersController::class, 'editProfile']); 
 
 });
 

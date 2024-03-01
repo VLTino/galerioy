@@ -49,10 +49,10 @@ class User extends Authenticatable
     ];
 
     public function posts(){
-        return $this->hasMany(gallery::class);
+        return $this->hasMany(gallery::class,'userid');
     }
 
     public function profile(){
-        return $this->belongsTo(profile::class);
+        return $this->belongsTo(profile::class,'userid');
     }
 }

@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\profile;
 use App\Http\Requests\StoreUsersRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 class UsersController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view ('hal.reg666',[
+        return view('hal.reg666', [
             "title" => "Register"
         ]);
     }
@@ -33,10 +35,10 @@ class UsersController extends Controller
     public function store(StoreUsersRequest $request)
     {
         $user = new User();
-        $user->name = $request->input('name');  
-        $user->email = $request->input('email');  
-        $user->password = bcrypt($request->input('password'));  
-        $user->level = $request->input('level');  
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->level = $request->input('level');
         $user->save();
         return redirect()->route('login')->with('success', 'User successfully registered. Please login.');
 
@@ -48,7 +50,7 @@ class UsersController extends Controller
     public function show(string $id)
     {
         $userID = Auth::user()->userid;
-        
+
 
         $user = profile::where('userid', $userID)->first();
 
@@ -80,6 +82,42 @@ class UsersController extends Controller
         return redirect()->back()->with('success', 'User level updated successfully');
     }
 
+
+    public function editProfile(Request $request, $profileid)
+{
+    $user = Auth::user();
+
+    // Validate the form data
+    $request->validate([
+        'photo_profile' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the validation rules as needed
+        'describe_profile' => 'nullable|string|max:50',
+        'link_acc' => 'nullable|string',
+    ]);
+
+    // Handle file upload
+    if ($request->hasFile('photo_profile')) {
+        // Delete the previous profile photo
+        if ($user->profile->photo_profile) {
+            Storage::delete('public/profile_photos/' . $user->profile->photo_profile);
+        }
+
+        $file = $request->file('photo_profile');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $file->storeAs('profile_photos', $fileName, 'public'); // Adjust the storage path as needed
+
+        // Update the user's photo_profile field
+        $user->profile->photo_profile = $fileName;
+    }
+
+    // Update the user's describe_profile and link_acc fields
+    $user->profile->describe_profile = $request->input('describe_profile');
+    $user->profile->link_acc = $request->input('link_acc');
+
+    // Save the changes
+    $user->profile->save();
+
+    return redirect('/profile/' . Auth::user()->userid)->with('success', 'Profile updated successfully'); // Redirect to the desired page
+}
     /**
      * Show the form for editing the specified resource.
      */
@@ -107,7 +145,7 @@ class UsersController extends Controller
             return redirect()->back()->with('error', 'User tidak ditemukan');
         }
 
-        $user -> delete();
+        $user->delete();
         return redirect()->back()->with('success', 'User has been deleted');
     }
 }

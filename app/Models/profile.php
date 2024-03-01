@@ -13,6 +13,8 @@ class profile extends Model
 
     protected $primaryKey = 'profileid';
 
+    public $timestamps = false ;
+
     protected $fillable = [
         'profileid',
         'userid',
