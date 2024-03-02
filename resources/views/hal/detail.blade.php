@@ -21,7 +21,7 @@
                         <input type="hidden" name="userid" value="{{ Auth::user()->userid }}">
                         <input type="hidden" name="id_photo" value="{{ $post->id_photo }}">
 
-                        @if ($post->likes->where('user_id', Auth::user()->id)->count() > 0)
+                        @if ($post->likes->where('userid', Auth::user()->userid)->count() > 0)
                         <button type="submit" class="btn btnheartactive btn-lg mr-2">
                                 <i class="fa-solid fa-heart"></i>
                             </button>
