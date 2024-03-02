@@ -50,7 +50,7 @@
 
                         <form id="deleteForm{{ $post->id_photo }}" action="/delete/{{ $post->id_photo }}" method="post" class="d-inline">
                             @csrf
-                            <button class="btn btnheart btn-lg mr-2" onclick="konfirmasiHapus({{ $post->id_photo }})">
+                            <button type="button" class="btn btnheart btn-lg mr-2" onclick="konfirmasiHapus({{ $post->id_photo }})">
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </form>
@@ -64,7 +64,7 @@
 
                         <form id="deleteForm{{ $post->id_photo }}" action="/delete/{{ $post->id_photo }}" method="post" class="d-inline">
                             @csrf
-                            <button class="btn btnheart btn-lg mr-2" onclick="konfirmasiHapus({{ $post->id_photo }})">
+                            <button type="button" class="btn btnheart btn-lg mr-2" onclick="konfirmasiHapus({{ $post->id_photo }})">
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </form>
