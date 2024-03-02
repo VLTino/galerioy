@@ -6,9 +6,11 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Models\gallery;
 use App\Http\Requests\StoregalleryRequest;
 use App\Http\Requests\UpdategalleryRequest;
+use App\Http\Requests\LikeRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\comment;
+use App\Models\Like;
 
 class GalleryController extends Controller
 {
@@ -45,17 +47,6 @@ class GalleryController extends Controller
         ]);
     }
 
-    public function storeComment(StoreCommentRequest $request, Gallery $post)
-{
-
-    Comment::create([
-        'id_photo' => $post->id_photo,
-        'comment' => $request->input('comment'),
-        'userid' => Auth::user()->userid
-    ]);
-
-    return redirect()->back()->with('success', 'Comment added successfully!');
-}
 
     public function upload()
     {
@@ -124,33 +115,33 @@ class GalleryController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateGalleryRequest $request, $id)
-{
-    $gallery = Gallery::findOrFail($id);
+    {
+        $gallery = Gallery::findOrFail($id);
 
-    // Update fields
-    $gallery->describe_photo = $request->input('describe_photo');
-    $gallery->userid = $request->input('userid');
-    $gallery->like_post = $request->input('like_post');
+        // Update fields
+        $gallery->describe_photo = $request->input('describe_photo');
+        $gallery->userid = $request->input('userid');
+        $gallery->like_post = $request->input('like_post');
 
-    // Handling file upload
-    if ($request->hasFile('gambar')) {
-        $image = $request->file('gambar');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        // Handling file upload
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-        // Save updated image to storage
-        Storage::putFileAs('public/img', $image, $imageName);
+            // Save updated image to storage
+            Storage::putFileAs('public/img', $image, $imageName);
 
-        // Delete old image from storage (optional)
-        Storage::delete('public/img/' . $gallery->gambar);
+            // Delete old image from storage (optional)
+            Storage::delete('public/img/' . $gallery->gambar);
 
-        // Update image name in the database
-        $gallery->gambar = $imageName;
+            // Update image name in the database
+            $gallery->gambar = $imageName;
+        }
+
+        $gallery->save();
+
+        return redirect()->route('galeriku')->with('success', 'Gambar berhasil diperbarui');
     }
-
-    $gallery->save();
-
-    return redirect()->route('galeriku')->with('success', 'Gambar berhasil diperbarui');
-}
 
     /**
      * Remove the specified resource from storage.
@@ -174,5 +165,44 @@ class GalleryController extends Controller
         $gallery->delete();
 
         return redirect()->route('galeriku')->with('success', 'Gambar berhasil dihapus');
+    }
+
+
+    public function storeComment(StoreCommentRequest $request, Gallery $post)
+    {
+
+        Comment::create([
+            'id_photo' => $post->id_photo,
+            'comment' => $request->input('comment'),
+            'userid' => Auth::user()->userid
+        ]);
+
+        return redirect()->back()->with('success', 'Comment added successfully!');
+    }
+
+    public function likePhoto(LikeRequest $request)
+    {
+        $userId = $request->input('userid');
+        $photoId = $request->input('id_photo');
+
+
+        // Check if the user already liked the photo
+        $like = Like::where('userid', $userId)
+            ->where('id_photo', $photoId)
+            ->first();
+
+        if ($like) {
+            // User already liked, so unlike
+            $like->delete();
+            return redirect()->back();
+        } else {
+            // User didn't like, so like
+            Like::create([
+                'userid' => $userId,
+                'id_photo' => $photoId,
+            ]);
+
+            return redirect()->back();
+        }
     }
 }

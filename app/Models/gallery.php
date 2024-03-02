@@ -28,4 +28,8 @@ class gallery extends Model
     {
         return $this->hasMany(Comment::class,'id_photo');
     }
+
+    public function likes(){
+        return $this->hasMany(like::class,'id_photo');
+    }
 }

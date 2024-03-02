@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function profile(){
         return $this->belongsTo(profile::class,'userid');
     }
+
+    public function likes(){
+        return $this->hasMany(like::class,'userid');
+    }
 }
