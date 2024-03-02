@@ -62,6 +62,7 @@ Route::middleware(['auth','UserAccess:admin'])->group(function () {
     Route::post('/deleteuser/{userid}',[UsersController::class,'destroy']);
 });
 Route::get('/', [GalleryController::class, 'home']);
+Route::get('/gallery/search', [GalleryController::class, 'home']);
 
 Route::get('/logout',[LoginController::class,'logout']);
 

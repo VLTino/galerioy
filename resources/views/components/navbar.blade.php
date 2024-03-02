@@ -14,9 +14,10 @@
                     <a class="nav-link" aria-current="page" style="" href="/upload">Upload</a>
                 </li>
             </ul>
-            <form class="d-flex container-fluid" role="search">
-                <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex container-fluid" role="search" action="/gallery/search" method="GET">
+                <input class="form-control me-2 search" type="search" name="query" placeholder="Search" aria-label="Search">
             </form>
+            
             <!-- Default dropstart button -->
             {{-- <div class="btn-group dropstart dropdown" style="margin-right: 10px">
                 <a data-bs-toggle="dropdown" aria-expanded="false" style="" href="/profile">

@@ -19,9 +19,17 @@ class GalleryController extends Controller
      */
     public function home()
     {
+        $query = request('query');
+
+        $posts = Gallery::when($query, function ($queryBuilder) use ($query) {
+            $queryBuilder->whereHas('user', function ($userQuery) use ($query) {
+                $userQuery->where('name', 'like', "%$query%");
+            })->orWhere('describe_photo', 'like', "%$query%");
+        })->get();
+
         return view('hal.home', [
             "title" => "Dashboard",
-            "posts" => gallery::all(),
+            "posts" => $posts,
         ]);
     }
 
