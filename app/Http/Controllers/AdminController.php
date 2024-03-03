@@ -34,13 +34,20 @@ dd($startDate);
 
     return response()->json(['labels' => $labels, 'imageCount' => $imageCount]);
 }
-    public function user()
-    {
-        return view ('hal.userdata',[
-            "title" => "Userdata",
-            "users" => User::all()
-        ]);
-    }
+public function user()
+{
+    $search = request('search');
+
+    $users = User::when($search, function ($query) use ($search) {
+        return $query->where('name', 'like', '%' . $search . '%');
+    })->get();
+
+    return view('hal.userdata', [
+        "title" => "Userdata",
+        "users" => $users,
+        "search" => $search,
+    ]);
+}
     public function regadmin()
     {
         return view ('hal.registeradmin',[
