@@ -18,7 +18,7 @@
                 <div class="card text-white bg-primary">
                   <div class="card-body">
                     <h5 class="card-title">User</h5>
-                    <h3 style="text-align: center"><i class="fa fa-user" aria-hidden="true"></i> 50</h3>
+                    <h3 style="text-align: center"><i class="fa fa-user" aria-hidden="true"></i> {{ $usercount }}</h3>
                   </div>
                 </div>
               </div>
@@ -26,7 +26,7 @@
                 <div class="card text-white bg-warning">
                   <div class="card-body">
                     <h5 class="card-title">Admin</h5>
-                    <h3 style="text-align: center"><i class="fa-solid fa-user-tie"></i> 5</h3>
+                    <h3 style="text-align: center"><i class="fa-solid fa-user-tie"></i> {{ $admincount }}</h3>
                   </div>
                 </div>
               </div>
@@ -34,7 +34,7 @@
                 <div class="card text-white bg-dark">
                   <div class="card-body">
                     <h5 class="card-title">Image</h5>
-                    <h3 style="text-align: center"><i class="fa-solid fa-images"></i> 150</h3>
+                    <h3 style="text-align: center"><i class="fa-solid fa-images"></i> {{ $gambarall }}</h3>
                   </div>
                 </div>
               </div>

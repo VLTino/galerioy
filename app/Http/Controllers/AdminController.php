@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\gallery;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -13,8 +14,25 @@ class AdminController extends Controller
      */
     public function index()
 {
-    return view('hal.admin',[
-        "title" => "Dashboard Admin"
+
+    $usercount = User::where('level','user')->count();
+    $admincount = User::where('level','admin')->count();
+    $gambarall = Gallery::all()->count();
+
+    $gambarcount = Gallery::select(
+        DB::raw('DATE_FORMAT(created_at, "%M") AS date'),
+        DB::raw('COUNT(*) AS count')
+    )
+        ->groupBy(DB::raw('DATE_FORMAT(created_at, "%M")'))
+        ->orderBy(DB::raw('DATE_FORMAT(created_at, "%M")'))
+        ->get();
+
+    return view('hal.admin', [
+        'title' => 'Admin',
+        'gambarcount' => $gambarcount,
+        "usercount" =>  $usercount,
+        "admincount" => $admincount,
+        "gambarall" => $gambarall
     ]);
 }
 
