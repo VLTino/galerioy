@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\comment;
 use App\Models\Like;
+use Illuminate\Support\Facades\DB;
 
 class GalleryController extends Controller
 {
@@ -63,6 +64,19 @@ class GalleryController extends Controller
         ]);
     }
 
+
+    public function likesshow()
+    {
+        $likes = DB::table('likes')
+            ->join('galleries', 'likes.id_photo', '=', 'galleries.id_photo')
+            ->where('likes.userid', '=', Auth::user()->userid) 
+            ->get();
+
+        return view('hal.likes', [
+            "title" => "Dashboard",
+            "posts" => $likes,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
