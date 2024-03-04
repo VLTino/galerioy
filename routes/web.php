@@ -41,7 +41,7 @@ Route::middleware(['auth','UserAccess:user,admin'])->group(function () {
     Route::post('/editprofile/{profileid}', [UsersController::class, 'editProfile']); 
     Route::post('/like', [GalleryController::class, 'likePhoto']); 
     Route::get('/mylike', [GalleryController::class, 'likesshow']); 
-
+    Route::get('/logout',[LoginController::class,'logout']);
 });
 
 
@@ -58,5 +58,5 @@ Route::middleware(['auth','UserAccess:admin'])->group(function () {
 Route::get('/', [GalleryController::class, 'home']);
 Route::get('/gallery/search', [GalleryController::class, 'home']);
 
-Route::get('/logout',[LoginController::class,'logout']);
+
 
