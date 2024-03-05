@@ -242,3 +242,20 @@ body {
 .close:hover {
     color: black;
 }
+
+.comment-container {
+  transition: transform 0.3s;
+}
+
+.comment-container:hover {
+  transform: scale(1.05); /* Anda dapat menyesuaikan nilai scale sesuai keinginan */
+}
+
+.delete-button {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.comment-container:hover .delete-button {
+  opacity: 1;
+}

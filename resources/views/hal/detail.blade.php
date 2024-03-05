@@ -134,23 +134,32 @@
             </div>
         </div>
         @foreach ($post->comments as $comment)
-            <div class="row d-flex align-items-center mt-3">
-                <div class="col-lg-1 comment-profil">
-                    @if ($comment && $comment->user && $comment->user->profile && $comment->user->profile->photo_profile)
-                        <img src="\storage\img\{{ $comment->user->profile->photo_profile }}" alt=""
-                            class="img-detail img-fluid">
-                    @else
-                        <!-- Display a default image or message if $user is null -->
-                        <img src="/default/pp.jpg" alt="Default Image" class="img-detail img-fluid">
-                    @endif
-                </div>
-
-                <div class="col-lg-10">
-                    <h5>{{ $comment->user->name }}</h5>
-                    <p>{{ $comment->comment }}</p>
-                </div>
+        <div class="row d-flex align-items-center mt-3 comment-container">
+            <div class="col-lg-1 comment-profil">
+                @if ($comment && $comment->user && $comment->user->profile && $comment->user->profile->photo_profile)
+                    <img src="\storage\img\{{ $comment->user->profile->photo_profile }}" alt=""
+                        class="img-detail img-fluid">
+                @else
+                    <!-- Display a default image or message if $user is null -->
+                    <img src="/default/pp.jpg" alt="Default Image" class="img-detail img-fluid">
+                @endif
             </div>
-        @endforeach
+    
+            <div class="col-lg-9">
+                <h5>{{ $comment->user->name }}</h5>
+                <p>{{ $comment->comment }}</p>
+            </div>
+    
+            <div class="col-lg-1">
+                <form id="deleteForm" action="" method="post" class="d-inline delete-button">
+                    @csrf
+                    <button type="button" class="btn btnheart btn-lg mr-2" onclick="">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    @endforeach
 
     </div>
 
